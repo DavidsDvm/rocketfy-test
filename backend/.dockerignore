@@ -1,0 +1,6 @@
+# Local database files
+postgres_data/
+
+# Node artifact files
+node_modules/
+dist/
