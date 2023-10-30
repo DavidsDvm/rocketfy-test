@@ -1,0 +1,58 @@
+﻿<div class="flex justify-center items-center h-screen bg-gray-100">
+  <div class="w-full max-w-md">
+    <div class="bg-white shadow-md rounded-lg p-8">
+      <img
+        src="../../assets/img/rocketfy.png"
+        alt="react logo"
+        class="w-40 mx-auto mb-5"
+      />
+      <form [formGroup]="registerForm">
+        <!-- disclaimer saying that this is a hidden register form in short text -->
+        <div>
+          <p class="text-slate-600 text-center text-xs">
+            This is a hidden register form. You can register by clicking the
+            button below.
+          </p>
+        </div>
+        <div class="mb-4">
+          <label for="email" class="block text-gray-700">Email</label>
+          <input
+            matInput
+            type="email"
+            formControlName="email"
+            id="email"
+            class="w-full mt-1 p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+          />
+          <div *ngIf="submitted && registerForm.get('email')?.errors" class="text-red-500 text-sm mt-1">
+            <div *ngIf="registerForm.get('email')?.hasError('required')">Email is required</div>
+            <div *ngIf="registerForm.get('email')?.hasError('email')">Invalid email format</div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <label for="password" class="block text-gray-700">Password</label>
+          <input
+            matInput
+            type="password"
+            formControlName="password"
+            id="password"
+            class="w-full mt-1 p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+          />
+          <div *ngIf="submitted && registerForm.get('password')?.errors" class="text-red-500 text-sm mt-1">
+            <div *ngIf="registerForm.get('password')?.hasError('required')">Password is required</div>
+          </div>
+        </div>
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="loading"
+          (click)="onSubmit()"
+          class="w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded-md"
+        >
+          <span *ngIf="loading" class="animate-spin inline-block mr-2">Loading...</span>
+          Register
+        </button>
+        <div *ngIf="error" class="text-red-500 text-sm mt-3">{{ error }}</div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+﻿<div class="flex justify-center items-center h-screen p-4 mt-4">
+  <div class="p-4">
+    <div *ngIf="loading" class="mt-4 text-blue-500 animate-spin inline-block">
+      Loading...
+    </div>
+    <div *ngIf="sensors" class="mt-4 grid grid-cols-4 gap-4">
+      <ng-container *ngFor="let sensor of sensors">
+        <div
+          class="flex flex-col justify-center rounded-lg bg-white overflow-hidden shadow-rocketfy"
+        >
+          <div class="p-4">
+            <h3 class="text-xl text-center text-black font-semibold">
+              {{ sensor.sensor_name }}
+            </h3>
+          </div>
+          <img
+            [src]="sensor.sensor_image"
+            alt="Sensor Image"
+            class="w-full h-60 object-cover"
+          />
+          <button
+            class="bg-gradient-to-r from-rocketfy-orange from-45% to-rocketfy-yellow text-white py-2 px-4 rounded-md mt-2"
+            [routerLink]="['/detail', sensor.sensor_id]"
+          >
+            More Info
+          </button>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

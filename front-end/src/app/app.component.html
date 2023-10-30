@@ -1,0 +1,14 @@
+﻿<!-- nav -->
+<nav class="bg-rocketfy-dark text-white py-3" *ngIf="user">
+  <div class="flex items-center justify-between container mx-auto px-4">
+    <a class="navbar-brand" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true}">
+      <img src="../../assets/img/logo_rocketfy_white.webp" alt="rocketfy Logo" class="w-40 mx-auto" />
+    </a>
+    <button class="text-white font-extrabold" (click)="logout()">Logout</button>
+  </div>
+</nav>
+
+<!-- main app container -->
+<div>
+    <router-outlet></router-outlet>
+</div>

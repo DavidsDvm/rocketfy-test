@@ -1,0 +1,63 @@
+﻿<div class="container mx-auto p-4">
+  <div class="bg-white shadow-md rounded-lg p-4">
+    <h1 class="text-xl text-center font-semibold mb-4">{{ sensor.sensor_name }}</h1>
+    <div class="mb-4">
+      <img [src]="sensor.sensor_image" alt="{{ sensor.sensor_name }} Image" class="w-full h-auto rounded-md" />
+    </div>
+    <h2 class="text-lg font-semibold mb-2">Sensor Data</h2>
+    <div class="flex justify-end font-semibold text-black">
+      <mat-slide-toggle [checked]="checked" (change)="onSlideToggleChange()"></mat-slide-toggle>
+      <p class="ml-2">Use machine learning</p>
+    </div>
+    <!-- need a graph for each chartsData -->
+    <ng-container *ngFor="let chart of chartsData">
+      <div class="w-full h-96">
+        <ngx-charts-line-chart
+          [results]="chart"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="true"
+          [animations]="true"
+          [autoScale]="true"
+          [trimXAxisTicks]="true"
+          [trimYAxisTicks]="true"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          xAxisLabel="timestamp"
+          yAxisLabel="{{ chart[0].name }}"
+        ></ngx-charts-line-chart>
+      </div>
+    </ng-container>
+    <h2 class="text-lg font-semibold mt-4">Average Data</h2>
+    <div class="flex justify-between">
+      <div class="w-full flex" *ngIf="sensor.averageData?.temperature && sensor.averageData?.humidity">
+        <div class="w-1/2">
+          <p>Temperature: {{ (sensor.averageData?.temperature)?.toString() | number:'1.0-2' }}</p>
+          <p>Humidity: {{ sensor.averageData?.humidity?.toString() | number:'1.0-2' }}</p>
+        </div>
+        <div class="w-1/2">
+          <p>Standard Deviation (Temperature): {{ sensor.standardDeviationData?.temperature?.toString() | number:'1.0-4' }}</p>
+          <p>Standard Deviation (Humidity): {{ sensor.standardDeviationData?.humidity?.toString() | number:'1.0-4' }}</p>
+        </div>
+      </div>
+      <div class="w-full flex" *ngIf="sensor.averageData?.pressure && sensor.averageData?.wind_speed">
+        <div class="w-1/2">
+          <p>Pressure: {{ sensor.averageData?.pressure?.toString() | number:'1.0-2' }}</p>
+          <p>Wind Speed: {{ sensor.averageData?.wind_speed?.toString() | number:'1.0-2' }}</p>
+        </div>
+        <div class="w-1/2">
+          <p>Standard Deviation (Pressure): {{ sensor.standardDeviationData?.pressure?.toString() | number:'1.0-4' }}</p>
+          <p>Standard Deviation (Wind Speed): {{ sensor.standardDeviationData?.wind_speed?.toString() | number:'1.0-4' }}</p>
+        </div>
+      </div>
+      <div class="w-full flex" *ngIf="sensor.averageData?.noise_level">
+        <div class="w-1/2">
+          <p>Noise Level: {{ sensor.averageData?.noise_level?.toString() | number:'1.0-2' }}</p>
+        </div>
+        <div class="w-1/2">
+          <p>Standard Deviation (Noise Level): {{ sensor.standardDeviationData?.noise_level?.toString() | number:'1.0-4' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
